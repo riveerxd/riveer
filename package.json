@@ -1,0 +1,37 @@
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "screenshots": "tsx scripts/capture-project-screenshots.ts",
+    "og:image": "tsx scripts/generate-og-image.tsx",
+    "deploy": "npm run og:image && npm run build"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.28.6",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.34.3",
+    "lucide-react": "^0.575.0",
+    "mql": "^0.0.1",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "puppeteer-core": "^24.2.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.5",
+    "typescript": "^5"
+  }
+}
