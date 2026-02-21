@@ -14,7 +14,7 @@ export function StructuredData({ locale, name, role, bio, email, sameAs = [] }: 
         "@context": "https://schema.org",
         "@type": "Person",
         name,
-        url: "https://riveer.cz",
+        url: "https://www.riveer.cz",
         email,
         jobTitle: role,
         description: bio,
@@ -26,7 +26,7 @@ export function StructuredData({ locale, name, role, bio, email, sameAs = [] }: 
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: `${name} Portfolio`,
-        url: "https://riveer.cz",
+        url: "https://www.riveer.cz",
         inLanguage: locale === "cs" ? "cs-CZ" : "en-US",
     };
 

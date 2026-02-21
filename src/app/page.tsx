@@ -44,7 +44,7 @@ export default function Home() {
             }
             aria-label="Locale redirect"
         >
-            <p className="text-sm text-white/75">
+            <p className="text-base text-white/75">
                 Redirecting to <Link href={`/${defaultLocale}`} className="underline">English</Link> or{" "}
                 <Link href="/cs" className="underline">Czech</Link> version...
             </p>

@@ -73,6 +73,7 @@ export type Dictionary = {
     };
     data: {
         projects: Record<string, string>;
+        projectDescriptions: Record<string, string>;
         experienceRoles: Record<string, string>;
         experienceDescriptions: Record<string, string>;
     };

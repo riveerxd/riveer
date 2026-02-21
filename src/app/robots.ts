@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://riveer.cz/sitemap.xml',
+        sitemap: 'https://www.riveer.cz/sitemap.xml',
     }
 }

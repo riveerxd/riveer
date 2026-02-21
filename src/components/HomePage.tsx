@@ -138,6 +138,8 @@ export function HomePage({ dictionary }: HomePageProps) {
   const getDescription = (id: string, fallback: string) =>
     dictionary.data.experienceDescriptions[id] || fallback;
   const getProjectTitle = (id: string, fallback: string) => dictionary.data.projects[id] || fallback;
+  const getProjectDescription = (id: string, fallback = "") =>
+    dictionary.data.projectDescriptions[id] || fallback;
 
   const easeInOutQuad = (t: number) =>
     t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -238,7 +240,7 @@ export function HomePage({ dictionary }: HomePageProps) {
             className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.15)]"
           >
             <Terminal size={14} className="text-purple-400 hidden sm:block" aria-hidden="true" />
-            <span className="text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] md:tracking-[0.3em] font-bold text-purple-300">
+            <span className="text-xs sm:text-sm md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] md:tracking-[0.3em] font-bold text-purple-300">
               <span className="hidden sm:inline">{dictionary.ui.currentRolePrefix}</span>
               {dictionary.personal.role}
             </span>
@@ -291,7 +293,7 @@ export function HomePage({ dictionary }: HomePageProps) {
               className="inline-flex flex-col items-center gap-2 text-cyan-200/80 hover:text-cyan-100 transition-colors duration-300"
               aria-label="Scroll to Experience section"
             >
-              <span className="text-[11px] uppercase tracking-[0.28em] font-medium font-space">
+              <span className="text-xs sm:text-sm uppercase tracking-[0.28em] font-medium font-space">
                 {dictionary.ui.scrollHint}
               </span>
               <span className="h-10 w-6 rounded-full border border-cyan-500/40 bg-cyan-500/5 flex items-start justify-center pt-1.5 backdrop-blur-sm">
@@ -432,6 +434,7 @@ export function HomePage({ dictionary }: HomePageProps) {
               const localizedProject = {
                 ...project,
                 title: getProjectTitle(project.id, project.title),
+                description: getProjectDescription(project.id, project.description),
               };
               return (
                 <div key={project.id} className={`w-full ${railAlignClass} max-w-5xl`}>

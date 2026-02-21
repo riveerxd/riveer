@@ -40,6 +40,21 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 16px;
+}
+
+@media (max-width: 430px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 18px;
+  }
 }
 
 body {
@@ -63,3 +78,29 @@ body {
 }
 
 /* Base custom styles for versions can be handled per page, but keeping utilities global helps */
+
+@media (max-width: 430px) {
+  .text-xs {
+    font-size: 0.875rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .text-\[10px\],
+  .text-\[11px\],
+  .text-\[12px\] {
+    font-size: 0.875rem !important;
+    line-height: 1.35 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .text-xs {
+    font-size: 0.9375rem !important;
+  }
+
+  .text-\[10px\],
+  .text-\[11px\],
+  .text-\[12px\] {
+    font-size: 0.9375rem !important;
+  }
+}

@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
         openGraph: {
             type: "website",
             locale: dictionary.metadata.openGraphLocale,
-            url: `https://riveer.cz/${locale}`,
+            url: `https://www.riveer.cz/${locale}`,
             title: dictionary.metadata.ogTitle,
             description: dictionary.metadata.ogDescription,
             siteName: dictionary.metadata.siteName,
@@ -55,11 +55,11 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
             images: ["/og-image.webp"],
         },
         alternates: {
-            canonical: `https://riveer.cz/${locale}`,
+            canonical: `https://www.riveer.cz/${locale}`,
             languages: {
-                en: "https://riveer.cz/en",
-                cs: "https://riveer.cz/cs",
-                "x-default": "https://riveer.cz/en",
+                en: "https://www.riveer.cz/en",
+                cs: "https://www.riveer.cz/cs",
+                "x-default": "https://www.riveer.cz/en",
             },
         },
         robots: {

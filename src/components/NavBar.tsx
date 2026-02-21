@@ -114,7 +114,7 @@ export function NavBar({ locale, dictionary }: NavBarProps) {
                                 className="group flex flex-col items-start gap-0.5 cursor-pointer"
                                 aria-label={`Scroll to ${item.label}`}
                             >
-                                <span className="text-[10px] font-space font-bold text-purple-500/60 transition-colors group-hover:text-purple-400">
+                                <span className="text-xs font-space font-bold text-purple-500/60 transition-colors group-hover:text-purple-400">
                                     {item.prefix}
                                 </span>
                                 <span className="text-xs md:text-sm font-space font-bold uppercase tracking-widest text-white/70 transition-all duration-300 group-hover:text-cyan-400 group-hover:translate-x-1">
@@ -129,7 +129,7 @@ export function NavBar({ locale, dictionary }: NavBarProps) {
                                     key={option.code}
                                     type="button"
                                     onClick={() => switchLanguage(option.code as Locale)}
-                                    className={`text-[10px] md:text-xs font-space font-bold uppercase tracking-[0.2em] transition-colors ${isLocale(option.code)
+                                    className={`text-xs md:text-sm font-space font-bold uppercase tracking-[0.2em] transition-colors ${isLocale(option.code)
                                         ? option.code === locale
                                             ? "text-cyan-300"
                                             : "text-white/50 hover:text-cyan-300"

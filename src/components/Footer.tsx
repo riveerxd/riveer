@@ -40,7 +40,7 @@ export function Footer({ dictionary }: FooterProps) {
 
                     <div className="mt-24 w-full flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-12">
                         <div className="flex flex-col items-center md:items-start gap-2">
-                            <span className="text-[10px] font-space font-bold text-white/20 uppercase tracking-[0.4em]">
+                            <span className="text-xs sm:text-sm font-space font-bold text-white/20 uppercase tracking-[0.4em]">
                                 {dictionary.protocolLabel}
                             </span>
                             <div className="flex items-center gap-4">
@@ -48,12 +48,12 @@ export function Footer({ dictionary }: FooterProps) {
                                     {dictionary.connectionLabel}
                                 </span>
                                 <div className="h-1 w-8 bg-white/10" />
-                                <span className="text-white/40 font-mono text-[10px]">{dictionary.statusCode}</span>
+                                <span className="text-white/40 font-mono text-xs sm:text-sm">{dictionary.statusCode}</span>
                             </div>
                         </div>
 
                         <div className="flex flex-col items-center md:items-end gap-2">
-                            <span className="text-[10px] font-space font-bold text-white/20 uppercase tracking-[0.4em]">
+                            <span className="text-xs sm:text-sm font-space font-bold text-white/20 uppercase tracking-[0.4em]">
                                 {dictionary.entityLabel}
                             </span>
                             <span className="text-white/60 font-space font-bold uppercase text-xs tracking-widest">

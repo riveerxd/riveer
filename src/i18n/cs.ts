@@ -94,6 +94,24 @@ export const csDictionary: Dictionary = {
             vlastimilbilek: "Vlastimilbilek.cz",
             ocnipetriny: "Ocnipetriny.cz",
         },
+        projectDescriptions: {
+            videre:
+                "Komplexní web oční kliniky v Praze se dvěma pobočkami, moderní diagnostikou a přehledným průchodem pro pacienty.",
+            "vpn.free":
+                "Instantní VPN a proxy platforma zaměřená na rychlý přístup bez instalace aplikace a složitého nastavení.",
+            nclinic:
+                "Prezentace moderní zubní kliniky se zaměřením na čelistní chirurgii, rozsah péče a kontaktní informace pro pacienty.",
+            hlasovyrobot:
+                "Web služeb AI voicebotů navržených pro automatizaci příchozích hovorů, podpory a kvalifikace leadů.",
+            clinicm:
+                "Web oční kliniky s praktickou kontaktně orientovanou strukturou, ordinační dobou a přehledem klíčových služeb.",
+            videre2:
+                "Web oční kliniky prezentující vyšetření, diagnostiku a péči hrazenou pojišťovnami pro pacienty z Prahy 7.",
+            vlastimilbilek:
+                "Profesní web technického poradce v oblasti životního prostředí se specializací na ochranu ovzduší.",
+            ocnipetriny:
+                "Web oční ordinace kombinující lidský přístup s detailním přehledem diagnostiky a ošetření.",
+        },
         experienceRoles: {
             "exp-5": "Freelance Web Developer",
             "exp-1": "Software Engineer & Developer",

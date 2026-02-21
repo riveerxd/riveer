@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Terminal prompt icon">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#050505"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="2"/>
+  <path d="M17 21L30 31.5L17 42" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="39.5" width="15" height="5" rx="2.5" fill="#a78bfa"/>
+</svg>
