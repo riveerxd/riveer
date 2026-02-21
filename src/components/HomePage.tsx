@@ -458,7 +458,7 @@ export function HomePage({ dictionary }: HomePageProps) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-32 scroll-mt-32"
+          className="mt-32 pb-20 scroll-mt-32"
         >
           <motion.div variants={fadeUp} className="mb-12 flex items-center gap-4">
             <h2 id="tools-heading" className="text-2xl font-space font-bold uppercase tracking-widest text-white/90">

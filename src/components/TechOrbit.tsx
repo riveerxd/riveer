@@ -8,15 +8,35 @@ type TechOrbitProps = {
     loadedLabel?: string;
 };
 
-const techStack = [
-    { name: "Next.js", iconPath: "/tech-orbit/nextdotjs.svg" },
-    { name: "React", iconPath: "/tech-orbit/react.svg" },
-    { name: "Vue.js", iconPath: "/tech-orbit/vuedotjs.svg" },
-    { name: "Nuxt.js", iconPath: "/tech-orbit/nuxt-js-icon.svg" },
-    { name: "Tailwind", iconPath: "/tech-orbit/tailwindcss.svg" },
-    { name: "ASP.NET", iconPath: "/tech-orbit/dotnet.svg" },
-    { name: "PostgreSQL", iconPath: "/tech-orbit/postgresql-icon.svg" },
+type OrbitItem = {
+    name: string;
+    abbr: string;
+    iconPath?: string;
+};
+
+const backendOrbit: OrbitItem[] = [
+    { name: "Python", abbr: "PY", iconPath: "/tech-orbit/python.svg" },
+    { name: "Node.js", abbr: "ND", iconPath: "/tech-orbit/nodejs.svg" },
+    { name: "ASP.NET", abbr: "NET", iconPath: "/tech-orbit/dotnet.svg" },
+    { name: "Linux", abbr: "LX", iconPath: "/tech-orbit/linux.svg" },
+    { name: "Docker", abbr: "DK", iconPath: "/tech-orbit/docker.svg" },
+    { name: "Nginx", abbr: "NG", iconPath: "/tech-orbit/nginx.svg" },
+    { name: "PostgreSQL", abbr: "PG", iconPath: "/tech-orbit/postgresql-icon.svg" },
+    { name: "MySQL", abbr: "MY", iconPath: "/tech-orbit/mysql.svg" },
+    { name: "Bash", abbr: "SH", iconPath: "/tech-orbit/bash.svg" },
 ];
+
+const frontendOrbit: OrbitItem[] = [
+    { name: "TypeScript", abbr: "TS", iconPath: "/tech-orbit/typescript.svg" },
+    { name: "React", abbr: "RE", iconPath: "/tech-orbit/react.svg" },
+    { name: "Next.js", abbr: "NX", iconPath: "/tech-orbit/nextdotjs.svg" },
+    { name: "Vue.js", abbr: "VU", iconPath: "/tech-orbit/vuedotjs.svg" },
+    { name: "Nuxt.js", abbr: "NU", iconPath: "/tech-orbit/nuxt-js-icon.svg" },
+    { name: "Tailwind", abbr: "TW", iconPath: "/tech-orbit/tailwindcss.svg" },
+    { name: "Git", abbr: "GT", iconPath: "/tech-orbit/git.svg" },
+];
+
+const mobileTechStack: OrbitItem[] = [...backendOrbit, ...frontendOrbit];
 
 export function TechOrbit({ loadedLabel = " // LOADED" }: TechOrbitProps) {
     const [isMobile, setIsMobile] = useState(false);
@@ -74,8 +94,13 @@ export function TechOrbit({ loadedLabel = " // LOADED" }: TechOrbitProps) {
                 ref={mobileSectionRef}
                 className="w-full py-20 px-4"
             >
+                <div className="mb-5 flex items-center justify-center gap-2 text-xs font-space font-bold uppercase tracking-[0.2em] text-cyan-200/70">
+                    <span>Backend</span>
+                    <span className="text-white/30">+</span>
+                    <span>Frontend</span>
+                </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {techStack.map((tech, idx) => (
+                    {mobileTechStack.map((tech, idx) => (
                         <div
                             key={tech.name}
                             style={{
@@ -89,15 +114,21 @@ export function TechOrbit({ loadedLabel = " // LOADED" }: TechOrbitProps) {
                             <div
                                 className="transition-transform duration-500 group-hover:scale-110"
                             >
-                                <Image
-                                    src={tech.iconPath}
-                                    alt={tech.name}
-                                    width={40}
-                                    height={40}
-                                    sizes="40px"
-                                    className="w-10 h-10 object-contain"
-                                    loading="lazy"
-                                />
+                                {tech.iconPath ? (
+                                    <Image
+                                        src={tech.iconPath}
+                                        alt={tech.name}
+                                        width={40}
+                                        height={40}
+                                        sizes="40px"
+                                        className="w-10 h-10 object-contain"
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <div className="w-10 h-10 rounded-xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center font-space text-xs font-bold tracking-widest text-cyan-200">
+                                        {tech.abbr}
+                                    </div>
+                                )}
                             </div>
                             <span className="font-space font-bold uppercase tracking-widest text-xs text-white/70 group-hover:text-white transition-colors">
                                 {tech.name}
@@ -112,12 +143,86 @@ export function TechOrbit({ loadedLabel = " // LOADED" }: TechOrbitProps) {
         );
     }
 
+    const renderOrbit = (
+        items: OrbitItem[],
+        radius: number,
+        rotationDuration: number,
+        reverse: boolean
+    ) => {
+        const orbitSize = radius * 2;
+        const ringRotate = reverse ? -360 : 360;
+        const itemRotate = reverse ? 360 : -360;
+
+        return (
+            <motion.div
+                animate={reducedMotion ? false : { rotate: ringRotate }}
+                transition={reducedMotion ? undefined : { duration: rotationDuration, repeat: Infinity, ease: "linear" }}
+                style={{
+                    position: "absolute",
+                    width: `${orbitSize}px`,
+                    height: `${orbitSize}px`,
+                    left: "50%",
+                    top: "50%",
+                    marginLeft: `${-radius}px`,
+                    marginTop: `${-radius}px`,
+                    pointerEvents: "none",
+                }}
+            >
+                {items.map((tech, idx) => {
+                    const angle = (idx / items.length) * 2 * Math.PI;
+                    return (
+                        <motion.div
+                            key={`${radius}-${tech.name}`}
+                            style={{
+                                position: "absolute",
+                                left: "50%",
+                                top: "50%",
+                                x: radius * Math.cos(angle),
+                                y: radius * Math.sin(angle),
+                                translateX: "-50%",
+                                translateY: "-50%",
+                                pointerEvents: "auto",
+                            }}
+                            animate={reducedMotion ? false : { rotate: itemRotate }}
+                            transition={reducedMotion ? undefined : { duration: rotationDuration, repeat: Infinity, ease: "linear" }}
+                            className="group relative cursor-pointer"
+                        >
+                            <div className="relative z-20 w-20 h-20 rounded-2xl bg-black/80 border border-white/10 backdrop-blur-xl flex flex-col items-center justify-center gap-2 group-hover:border-cyan-500/50 group-hover:bg-cyan-950/20 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                                {tech.iconPath ? (
+                                    <Image
+                                        src={tech.iconPath}
+                                        alt={tech.name}
+                                        width={40}
+                                        height={40}
+                                        sizes="40px"
+                                        className="w-10 h-10 object-contain"
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <div className="w-10 h-10 rounded-xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center font-space text-xs font-bold tracking-widest text-cyan-200">
+                                        {tech.abbr}
+                                    </div>
+                                )}
+                                <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                    <span className="text-xs sm:text-sm font-space font-bold uppercase tracking-widest text-cyan-400 whitespace-nowrap">
+                                        {tech.name}
+                                        {loadedLabel}
+                                    </span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </motion.div>
+        );
+    };
+
     return (
-        <div className="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-[640px] flex items-center justify-center overflow-visible">
             {/* Background decoration */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[500px] h-[500px] rounded-full border border-dashed border-cyan-500/10 animate-[spin_60s_linear_infinite]" />
-                <div className="absolute w-[350px] h-[350px] rounded-full border border-white/5" />
+                <div className="w-[560px] h-[560px] rounded-full border border-dashed border-cyan-500/10" />
+                <div className="absolute w-[360px] h-[360px] rounded-full border border-dashed border-cyan-500/10" />
             </div>
 
             {/* Central Hub */}
@@ -137,62 +242,8 @@ export function TechOrbit({ loadedLabel = " // LOADED" }: TechOrbitProps) {
                 </div>
             </motion.div>
 
-            {/* Orbiting Elements */}
-            {techStack.map((tech, idx) => {
-                const angle = (idx / techStack.length) * 2 * Math.PI;
-                const radius = 220;
-
-                return (
-                    <motion.div
-                        key={tech.name}
-                        animate={reducedMotion ? false : { rotate: 360 }}
-                        transition={reducedMotion ? undefined : { duration: 25, repeat: Infinity, ease: "linear" }}
-                        style={{
-                            position: "absolute",
-                            width: "440px",
-                            height: "440px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            pointerEvents: "none",
-                        }}
-                    >
-                        <motion.div
-                            style={{
-                                x: radius * Math.cos(angle),
-                                y: radius * Math.sin(angle),
-                                pointerEvents: "auto",
-                            }}
-                            animate={reducedMotion ? false : { rotate: -360 }}
-                            transition={reducedMotion ? undefined : { duration: 25, repeat: Infinity, ease: "linear" }}
-                            className="group relative cursor-pointer"
-                        >
-                            <div className="relative z-20 w-20 h-20 rounded-2xl bg-black/80 border border-white/10 backdrop-blur-xl flex flex-col items-center justify-center gap-2 group-hover:border-cyan-500/50 group-hover:scale-110 group-hover:bg-cyan-950/20 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                                <div className="transition-transform group-hover:rotate-12">
-                                <Image
-                                    src={tech.iconPath}
-                                    alt={tech.name}
-                                    width={40}
-                                    height={40}
-                                        sizes="40px"
-                                        className="w-10 h-10 object-contain"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
-                                    <span className="text-xs sm:text-sm font-space font-bold uppercase tracking-widest text-cyan-400 whitespace-nowrap">
-                                        {tech.name}
-                                        {loadedLabel}
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Connector Line (Stylized) */}
-                            <div className="absolute top-1/2 left-1/2 w-32 h-[1px] bg-gradient-to-r from-cyan-500/20 to-transparent origin-left -translate-y-1/2 -z-10 opacity-0 group-hover:opacity-100 transition-all duration-500" style={{ transform: `rotate(${angle + Math.PI}rad)` }} />
-                        </motion.div>
-                    </motion.div>
-                );
-            })}
+            {renderOrbit(backendOrbit, 300, 30, false)}
+            {renderOrbit(frontendOrbit, 170, 30, true)}
         </div>
     );
 }
