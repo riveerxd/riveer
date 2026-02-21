@@ -5,7 +5,7 @@ export const enDictionary: Dictionary = {
         defaultTitle: "River | Software Engineer & Developer",
         titleTemplate: "%s | River",
         description:
-            "I build interactive, high-performance web experiences with a platform mindset - from robust APIs to elegant interfaces. If it needs to be fast, dependable, and built for growth, it’s my lane.",
+            "I build interactive, high-performance digital experiences with a platform mindset - from robust APIs to elegant interfaces. If it needs to be fast, dependable, and built for growth, it’s my lane.",
         keywords: [
             "River",
             "Software Engineer",
@@ -19,16 +19,16 @@ export const enDictionary: Dictionary = {
         openGraphLocale: "en_US",
         ogTitle: "River - Portfolio",
         ogDescription:
-            "I build interactive, high-performance web experiences with a platform mindset - from robust APIs to elegant interfaces.",
+            "I build interactive, high-performance digital experiences with a platform mindset - from robust APIs to elegant interfaces.",
         siteName: "River Portfolio",
         ogImageAlt: "River - Software Engineer & Developer",
         twitterTitle: "River - Portfolio",
         twitterDescription:
-            "I build interactive, high-performance web experiences with a platform mindset.",
+            "I build interactive, high-performance digital experiences with a platform mindset.",
     },
     personal: {
         role: "Software Engineer & Developer",
-        bio: "I build interactive, high-performance web experiences with a platform mindset - from robust APIs to elegant interfaces. If it needs to be fast, dependable, and built for growth, it’s my lane.",
+        bio: "I build interactive, high-performance digital experiences with a platform mindset - from robust APIs to elegant interfaces. If it needs to be fast, dependable, and built for growth, it’s my lane.",
     },
     ui: {
         skipToContent: "Skip to content",

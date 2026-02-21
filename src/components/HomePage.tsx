@@ -231,15 +231,15 @@ export function HomePage({ dictionary }: HomePageProps) {
           variants={heroStagger}
           initial="hidden"
           animate="show"
-          className="mt-32 md:mt-48 flex flex-col items-center justify-center gap-8 text-center"
+          className="mt-20 md:mt-48 flex flex-col items-center justify-center gap-5 md:gap-8 text-center"
         >
           <motion.div
             variants={heroRevealItem}
             className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.15)]"
           >
-            <Terminal size={14} className="text-purple-400" aria-hidden="true" />
-            <span className="text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.22em] md:tracking-[0.3em] font-bold text-purple-300">
-              {dictionary.ui.currentRolePrefix}
+            <Terminal size={14} className="text-purple-400 hidden sm:block" aria-hidden="true" />
+            <span className="text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.22em] md:tracking-[0.3em] font-bold text-purple-300">
+              <span className="hidden sm:inline">{dictionary.ui.currentRolePrefix}</span>
               {dictionary.personal.role}
             </span>
           </motion.div>
@@ -247,7 +247,7 @@ export function HomePage({ dictionary }: HomePageProps) {
           <motion.h1
             id="about-heading"
             variants={heroRevealItem}
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-[7.5rem] font-space font-black tracking-tighter leading-[1.05] text-white uppercase overflow-visible"
+            className="text-5xl sm:text-6xl md:text-8xl lg:text-[7.5rem] font-space font-black tracking-tighter leading-[0.95] text-white uppercase overflow-visible"
           >
             {dictionary.headings.heroLine1} <br />
             <span className="inline-block pr-2 text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-cyan-500 to-purple-600 [text-shadow:0_0_80px_rgba(6,182,212,0.5)]">
@@ -257,16 +257,16 @@ export function HomePage({ dictionary }: HomePageProps) {
 
           <motion.p
             variants={heroRevealItem}
-            className="text-base sm:text-lg md:text-2xl text-cyan-100/60 max-w-3xl leading-relaxed mt-4 font-light"
+            className="text-sm sm:text-lg md:text-2xl text-cyan-100/60 max-w-3xl leading-relaxed mt-2 md:mt-4 font-light px-2"
           >
             {dictionary.personal.bio}
           </motion.p>
 
-            <motion.div variants={heroRevealItem} className="flex flex-col sm:flex-row items-center gap-6 mt-8">
+            <motion.div variants={heroRevealItem} className="flex flex-row items-center gap-3 sm:gap-6 mt-4 md:mt-8">
             <button
               type="button"
               onClick={() => scrollToSection("projects")}
-              className="px-8 py-4 rounded-full bg-cyan-500 text-black font-space font-bold uppercase tracking-widest hover:bg-cyan-400 hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer"
+              className="px-5 py-3 sm:px-8 sm:py-4 rounded-full bg-cyan-500 text-black font-space font-bold uppercase text-xs sm:text-sm tracking-wider sm:tracking-widest hover:bg-cyan-400 hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer"
               aria-label={`Scroll to ${dictionary.nav.projectLog} section`}
             >
               {dictionary.buttons.projects}
@@ -274,7 +274,7 @@ export function HomePage({ dictionary }: HomePageProps) {
             <button
               type="button"
               onClick={() => scrollToSection("contact", "contact-open-opportunities")}
-              className="px-8 py-4 rounded-full border border-purple-500/50 text-purple-400 font-space font-bold uppercase tracking-widest hover:bg-purple-500/10 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-pointer"
+              className="px-5 py-3 sm:px-8 sm:py-4 rounded-full border border-purple-500/50 text-purple-400 font-space font-bold uppercase text-xs sm:text-sm tracking-wider sm:tracking-widest hover:bg-purple-500/10 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-pointer"
               aria-label={`Scroll to ${dictionary.sections.contact} section`}
             >
               {dictionary.buttons.contact}

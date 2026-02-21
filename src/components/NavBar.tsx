@@ -99,8 +99,8 @@ export function NavBar({ locale, dictionary }: NavBarProps) {
                         onClick={() => setIsMenuOpen(false)}
                         aria-label="Home - River Core Portfolio"
                     >
-                        <div aria-hidden="true" className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
-                        <span className="text-xl md:text-2xl font-space font-black tracking-tighter text-white uppercase group-hover:text-cyan-400 transition-colors duration-300">
+                        <div aria-hidden="true" className="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
+                        <span className="text-2xl md:text-2xl font-space font-black tracking-tighter text-white uppercase group-hover:text-cyan-400 transition-colors duration-300">
                             RIVER<span className="text-purple-500">{"//"}</span>CORE
                         </span>
                     </Link>
