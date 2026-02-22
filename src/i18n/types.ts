@@ -63,6 +63,23 @@ export type Dictionary = {
         messageLabel: string;
         messagePlaceholder: string;
     };
+    contactPanel: {
+        quickChannelsLabel: string;
+        responseTimeLabel: string;
+        responseTimeValue: string;
+        emailTitle: string;
+        emailSubtitle: string;
+        linkedinTitle: string;
+        linkedinSubtitle: string;
+        githubTitle: string;
+        githubSubtitle: string;
+        openChannel: string;
+        unavailable: string;
+        copyEmail: string;
+        copied: string;
+        formLabel: string;
+        directToLabel: string;
+    };
     footer: {
         protocolLabel: string;
         connectionLabel: string;

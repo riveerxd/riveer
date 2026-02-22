@@ -18,6 +18,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     const resolvedParams = await Promise.resolve(params);
     const locale = isLocale(resolvedParams.locale) ? resolvedParams.locale : defaultLocale;
     const dictionary: Dictionary = getDictionary(locale);
+    const sameAs = [...personalInfo.sameAs, personalInfo.githubUrl, personalInfo.linkedinUrl].filter(Boolean);
 
     return (
         <>
@@ -35,7 +36,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
                 role={dictionary.personal.role}
                 bio={dictionary.personal.bio}
                 email={personalInfo.email}
-                sameAs={personalInfo.sameAs}
+                sameAs={sameAs}
             />
             <main id="main-content" tabIndex={-1}>
                 {children}

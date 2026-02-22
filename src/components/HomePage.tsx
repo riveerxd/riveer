@@ -2,7 +2,8 @@
 
 import { motion, Variants, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Award, Briefcase, Terminal, ArrowDown } from "lucide-react";
+import { Award, Briefcase, Terminal, ArrowDown, ArrowUpRight, Copy, Check } from "lucide-react";
+import Image from "next/image";
 
 import { ProjectCard } from "@/components/ProjectCard";
 import { TechOrbit } from "@/components/TechOrbit";
@@ -106,6 +107,7 @@ type HomePageProps = {
 export function HomePage({ dictionary }: HomePageProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [showScrollCue, setShowScrollCue] = useState(true);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -140,6 +142,32 @@ export function HomePage({ dictionary }: HomePageProps) {
   const getProjectTitle = (id: string, fallback: string) => dictionary.data.projects[id] || fallback;
   const getProjectDescription = (id: string, fallback = "") =>
     dictionary.data.projectDescriptions[id] || fallback;
+  const socialCards = [
+    {
+      key: "email",
+      title: dictionary.contactPanel.emailTitle,
+      value: personalInfo.email,
+      href: `mailto:${personalInfo.email}`,
+      icon: "/icons/social/mail.svg",
+      tone: "cyan" as const,
+    },
+    {
+      key: "linkedin",
+      title: dictionary.contactPanel.linkedinTitle,
+      value: personalInfo.linkedinUrl,
+      href: personalInfo.linkedinUrl,
+      icon: "/icons/social/linkedin.svg",
+      tone: "violet" as const,
+    },
+    {
+      key: "github",
+      title: dictionary.contactPanel.githubTitle,
+      value: personalInfo.githubUrl,
+      href: personalInfo.githubUrl,
+      icon: "/icons/social/github.svg",
+      tone: "hybrid" as const,
+    },
+  ];
 
   const easeInOutQuad = (t: number) =>
     t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -202,6 +230,24 @@ export function HomePage({ dictionary }: HomePageProps) {
       return;
     }
     animateScrollTo(targetY);
+  };
+
+  const getContactValueLabel = (value: string, fallback: string) => {
+    if (!value) {
+      return fallback;
+    }
+
+    return value.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  };
+
+  const copyEmailToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopiedEmail(true);
+      window.setTimeout(() => setCopiedEmail(false), 1800);
+    } catch {
+      setCopiedEmail(false);
+    }
   };
 
   return (
@@ -477,7 +523,7 @@ export function HomePage({ dictionary }: HomePageProps) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mt-32 pb-24 flex flex-col items-center justify-center gap-8 text-center max-w-4xl mx-auto w-full scroll-mt-32"
+          className="mt-32 pb-24 flex flex-col items-center justify-center gap-8 text-center max-w-6xl mx-auto w-full scroll-mt-32"
         >
           <motion.div variants={fadeUp} className="flex items-center gap-3 px-6 py-2.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)]">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
@@ -497,53 +543,150 @@ export function HomePage({ dictionary }: HomePageProps) {
             </span>
           </motion.h2>
 
-          <motion.form
-            variants={fadeUp}
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const subject = formData.get("subject");
-              const message = formData.get("message");
-              window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject as string)}&body=${encodeURIComponent(message as string)}`;
-            }}
-            className="flex flex-col gap-6 w-full max-w-2xl mt-8 text-left bg-black/40 p-6 md:p-10 rounded-[2.5rem] border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-xl"
-          >
-            <div className="flex flex-col gap-3">
-              <label htmlFor="subject" className="text-xs font-space font-bold text-cyan-400 tracking-widest uppercase pl-4">
-                {dictionary.form.subjectLabel}
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                required
-                placeholder={dictionary.form.subjectPlaceholder}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500 focus:bg-white/10 focus:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-300"
-              />
-            </div>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="message" className="text-xs font-space font-bold text-purple-400 tracking-widest uppercase pl-4">
-                {dictionary.form.messageLabel}
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder={dictionary.form.messagePlaceholder}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 focus:bg-white/10 focus:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300 resize-none"
-              />
-            </div>
+          <motion.div variants={fadeUp} className="relative w-full mt-8 p-1 sm:p-2">
+            <div className="pointer-events-none absolute -top-24 -left-24 h-64 w-64 rounded-full bg-cyan-500/20 blur-[110px]" />
+            <div className="pointer-events-none absolute -bottom-28 -right-24 h-72 w-72 rounded-full bg-purple-500/18 blur-[120px]" />
 
-            <div className="mt-4 flex justify-center">
-              <button
-                type="submit"
-                className="px-10 py-4 w-full md:w-auto rounded-full bg-cyan-500 text-black font-space font-bold uppercase tracking-widest hover:bg-cyan-400 hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer"
+            <div className="relative z-10 flex flex-col gap-8">
+              <div className="flex flex-wrap items-start justify-center gap-6 md:gap-10">
+                {socialCards.map((card, index) => {
+                  const isActive = Boolean(card.href);
+                  const toneRing =
+                    card.tone === "violet"
+                      ? "hover:border-purple-300/75 hover:shadow-[0_0_45px_rgba(196,181,253,0.4)]"
+                      : card.tone === "hybrid"
+                        ? "hover:border-cyan-300/80 hover:shadow-[0_0_45px_rgba(125,211,252,0.35),0_0_55px_rgba(167,139,250,0.28)]"
+                        : "hover:border-cyan-300/75 hover:shadow-[0_0_45px_rgba(103,232,249,0.4)]";
+                  const toneText =
+                    card.tone === "violet"
+                      ? "text-purple-200"
+                      : card.tone === "hybrid"
+                        ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-purple-200"
+                        : "text-cyan-200";
+                  const toneIconShell =
+                    card.tone === "violet"
+                      ? "border-purple-300/35 bg-purple-400/10"
+                      : card.tone === "hybrid"
+                        ? "border-cyan-300/35 bg-gradient-to-br from-cyan-400/15 to-purple-500/12"
+                        : "border-cyan-300/35 bg-cyan-400/10";
+                  const toneInnerRing =
+                    card.tone === "violet"
+                      ? "border-purple-200/20"
+                      : card.tone === "hybrid"
+                        ? "border-cyan-200/20"
+                        : "border-cyan-200/20";
+
+                  if (!isActive) {
+                    return null;
+                  }
+
+                  return (
+                    <a
+                      key={card.key}
+                      href={card.href}
+                      target={card.key === "email" ? undefined : "_blank"}
+                      rel={card.key === "email" ? undefined : "noopener noreferrer"}
+                      className="group flex flex-col items-center gap-3"
+                      aria-label={`${card.title}: ${getContactValueLabel(card.value, dictionary.contactPanel.unavailable)}`}
+                    >
+                      <span
+                        className={`relative flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center rounded-full border border-white/30 bg-white/[0.08] backdrop-blur-xl transition-all duration-300 ${toneRing}`}
+                      >
+                        <span className={`pointer-events-none absolute inset-1 rounded-full border ${toneInnerRing}`} />
+                        <span className={`pointer-events-none absolute inset-[22%] rounded-full border ${toneIconShell}`} />
+                        <Image
+                          src={card.icon}
+                          alt={card.title}
+                          width={42}
+                          height={42}
+                          sizes="42px"
+                          className="h-9 w-9 sm:h-10 sm:w-10 invert"
+                          priority={index < 2}
+                        />
+                      </span>
+                      <span className="text-[11px] font-space font-bold uppercase tracking-[0.2em] text-white/90">
+                        {card.title}
+                      </span>
+                      <span className={`text-[11px] font-space tracking-[0.08em] ${toneText}`}>
+                        {getContactValueLabel(card.value, dictionary.contactPanel.unavailable)}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={copyEmailToClipboard}
+                  className="inline-flex items-center gap-2 rounded-full border border-cyan-300/35 bg-cyan-500/10 px-4 py-2 text-[10px] font-space font-bold uppercase tracking-[0.14em] text-cyan-200 hover:bg-cyan-500/20 hover:border-cyan-300/60 transition-all duration-300 cursor-pointer"
+                >
+                  {copiedEmail ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedEmail ? dictionary.contactPanel.copied : dictionary.contactPanel.copyEmail}
+                </button>
+              </div>
+
+              <motion.form
+                variants={fadeUp}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const subject = formData.get("subject");
+                  const message = formData.get("message");
+                  window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject as string)}&body=${encodeURIComponent(message as string)}`;
+                }}
+                className="mx-auto w-full max-w-3xl rounded-[1.5rem] border border-white/12 bg-black/35 p-4 sm:p-5 md:p-6 text-left"
               >
-                {dictionary.buttons.contactSubmit}
-              </button>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="sm:col-span-2 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2.5">
+                      <p className="text-[10px] font-space font-bold uppercase tracking-[0.2em] text-white/55">
+                        {dictionary.contactPanel.formLabel}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="subject" className="text-[10px] font-space font-bold text-cyan-300 tracking-[0.16em] uppercase">
+                      {dictionary.form.subjectLabel}
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      placeholder={dictionary.form.subjectPlaceholder}
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.04] p-3.5 text-white placeholder:text-white/35 focus:outline-none focus:border-cyan-400 focus:bg-white/[0.07] transition-all duration-300"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2.5">
+                    <label htmlFor="message" className="text-[10px] font-space font-bold text-violet-300 tracking-[0.16em] uppercase">
+                      {dictionary.form.messageLabel}
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      placeholder={dictionary.form.messagePlaceholder}
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.04] p-3.5 text-white placeholder:text-white/35 focus:outline-none focus:border-violet-400 focus:bg-white/[0.07] transition-all duration-300 resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-0.5 flex justify-end">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-2.5 w-full sm:w-auto rounded-full bg-cyan-400 text-black font-space font-black uppercase tracking-[0.14em] hover:bg-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.45)] transition-all duration-300 cursor-pointer"
+                    >
+                      {dictionary.buttons.contactSubmit}
+                      <ArrowUpRight size={14} />
+                    </button>
+                  </div>
+                </div>
+              </motion.form>
             </div>
-          </motion.form>
+          </motion.div>
         </motion.section>
       </section>
     </div>
