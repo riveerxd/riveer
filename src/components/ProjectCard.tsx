@@ -27,12 +27,6 @@ export function ProjectCard({ project, idx, itemVariants, variant = 'default', v
         const buttonStyle = isEven
             ? 'border-cyan-300/70 text-cyan-100 hover:bg-cyan-300 hover:text-black hover:shadow-[0_0_30px_rgba(34,211,238,0.45)]'
             : 'border-fuchsia-300/70 text-fuchsia-100 hover:bg-fuchsia-300 hover:text-black hover:shadow-[0_0_30px_rgba(217,70,239,0.45)]';
-        const nodePosition = isEven
-          ? '-top-2 -left-2 md:-top-3 md:-left-3'
-          : '-top-2 -right-2 md:-top-3 md:-right-3';
-        const nodeColor = isEven
-            ? 'bg-cyan-950 border-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.75)] group-hover:bg-cyan-300'
-            : 'bg-fuchsia-950 border-fuchsia-400 shadow-[0_0_18px_rgba(217,70,239,0.75)] group-hover:bg-fuchsia-300';
         const domainLabel = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
         const projectIndex = String(idx + 1).padStart(2, "0");
 
@@ -47,9 +41,6 @@ export function ProjectCard({ project, idx, itemVariants, variant = 'default', v
                 <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${ambientGlow} opacity-70`} />
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:2.8rem_2.8rem] opacity-20" />
                 <div className="pointer-events-none absolute inset-0 rounded-[28px] border border-white/10" />
-
-                {/* Glowing node matching experience timeline */}
-                <div className={`absolute ${nodePosition} w-4 h-4 md:w-6 md:h-6 rounded-full border-2 ${nodeColor} group-hover:scale-125 transition-all duration-300 z-20`} />
 
                 {/* Native API Screenshot */}
                 <div className={`relative w-full md:w-1/2 aspect-video overflow-hidden rounded-[22px] border border-white/20 ${borderHover} shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-colors duration-500`}>
