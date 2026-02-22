@@ -88,7 +88,7 @@ export function NavBar({ locale, dictionary }: NavBarProps) {
                 animate={reduceMotion ? false : { y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className={`fixed top-0 left-0 right-0 z-[110] transition-all duration-500 ${scrolled || isMenuOpen
-                    ? "bg-black/80 backdrop-blur-2xl border-b border-cyan-500/20 shadow-[0_4px_20px_rgba(6,182,212,0.1)]"
+                    ? "bg-black/80 backdrop-blur-2xl border-b border-cyan-500/20"
                     : "bg-transparent py-4 border-transparent"
                     }`}
             >
